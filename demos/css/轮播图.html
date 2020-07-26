@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图来啦</title>
+    <style>
+        .box{
+            width: 100%;
+            height: 400px;
+            top:100px;
+            position: absolute;
+            display: table;
+            background-color: antiquewhite;
+        }
+       #slide{
+            width:600px;
+            margin:0 auto;
+            height: 400px;
+           display: table-cell;
+        }
+        #back{
+            width:50px;
+            height: 100px;
+            top:250px;
+            position: absolute;
+        }
+        #forward{
+            width:50px;
+            height: 100px;
+            top:250px;
+            position: absolute;
+            right:0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <img id="slide" src="../img/0.jpg">
+
+    </div>
+    <img id="back" src="../img/left.svg" onclick="back()">
+    <img id="forward" src="../img/right.svg" onclick="right()">
+
+
+
+<script>
+    var cur_num=0;
+    var slide_img=document.getElementById("slide");
+    var autoplay;
+
+
+    //自动切换
+    function auto() {
+        function change() {
+            cur_num++;
+            if (cur_num === 4) {
+                cur_num = 0;
+            }
+            slide_img.src = "../img/" + cur_num + ".jpg";
+        }
+
+        autoplay= setInterval(change, 3000);
+    }
+    //鼠标悬停时暂停自动切换，或者是按左右按钮了
+    function pause(){
+        clearInterval(autoplay);
+    }
+    slide_img.onmouseover=pause;
+    slide_img.onmouseout=auto;
+
+    //左右切换
+    function back() {
+        pause();
+
+        cur_num--;
+        if(cur_num===-1){
+            cur_num=3;
+        }
+        slide_img.src="../img/"+cur_num+".jpg";
+       auto();
+    }
+    function right() {
+       pause();
+        cur_num++;
+        if(cur_num===4){
+            cur_num=0;
+        }
+        slide_img.src="../img/"+cur_num+".jpg";
+        auto();
+    }
+</script>
+
+
+</body>
+</html>
