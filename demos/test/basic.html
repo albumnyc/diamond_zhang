@@ -14,25 +14,25 @@
 <body>
     <script>
         const obj  = new Object({});
-        obj.__proto__ ===   ?;
+        obj.__proto__ ===  Object.prototype ;
 
         const obj1 = Object.create(obj);
-        obj1.__proto__ === ?;
+        obj1.__proto__ === obj.__proto__;
 
-        Function.prototype.__proto__ === ?;
-        Array.__proto__ === ? ;
-        Object.__proto__ === ? ;
-        Array instanceof Object ?
-
-
-        obj instanceof Object  ?
-        obj1 instanceof obj ?
-        Function instanceof Object?
-        Object instanceof Function ?
-        [] == ![] ?
+        Function.prototype.__proto__ === Object.prototype;
+        Array.__proto__ === Array.prototype ;
+        Object.__proto__ === Object.prototype ;
+        Array instanceof Object  //true
 
 
-        Object.getPrototypeOf(obj) === ? ;
+        obj instanceof Object  //true
+        obj1 instanceof obj //true
+        Function instanceof Object//true
+        Object instanceof Function //true
+        [] == ![] //false
+
+
+        Object.getPrototypeOf(obj) === Object.prototype ;
 
 
 
