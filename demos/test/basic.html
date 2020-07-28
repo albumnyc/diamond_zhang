@@ -15,28 +15,52 @@
     <script>
         const obj  = new Object({});
         obj.__proto__ ===  Object.prototype ;
+        //new的操作
+        //new 后面一定是Function
 
         const obj1 = Object.create(obj);
-        obj1.__proto__ === obj.__proto__;
+        obj1.__proto__ === obj;
+
 
         Function.prototype.__proto__ === Object.prototype;
-        Array.__proto__ === Array.prototype ;
-        Object.__proto__ === Object.prototype ;
+        Array.__proto__ === Function.prototype ;
+        //他是指向的关系，不是耦合的关系
+        Object.__proto__ === Function.prototype ;
         Array instanceof Object  //true
+        //因为Array
 
 
         obj instanceof Object  //true
-        obj1 instanceof obj //true
+        obj1 instanceof Object //true
         Function instanceof Object//true
         Object instanceof Function //true
-        [] == ![] //false
+        [] == ![] //true
+        //隐式类型转换，[]-->"" ![]-->"" 所以相等
 
 
         Object.getPrototypeOf(obj) === Object.prototype ;
 
+        class H{
+            constructor(){
+
+            }
+           function add(){
+            this.lover="nyc";
+        }
+        }
+        const zzh=new H();
+        zzh.add();
+        console(zzh.lover);
+
+        如果有个O继承了H，   O.__proto__=H
 
 
         
     </script>
 </body>
 </html>
+//原型链的顶端是null-->Object.prototype Object-->function.prototype  function-->array.prototype/String.prototype  Array/String
+(new String()).typeof=Object
+
+var a={};//也有__proto
+
