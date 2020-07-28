@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="39e0f478-059a-4be6-97c4-4584b5798b67" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/javascript/数组去重.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascript/javascript.md" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/javascript.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascript/reverse.js" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/reverse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascript/数组去重.js" beforeDir="false" afterPath="$PROJECT_DIR$/javascript/数组去重.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,19 +19,19 @@
         <entry file="file://$PROJECT_DIR$/javascript/javascript.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="418">
-                <caret line="22" column="8" lean-forward="true" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+              <first_editor relative-caret-position="437">
+                <caret line="23" column="42" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="42" />
               </first_editor>
               <second_editor />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/javascript/reverse.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="304">
-              <caret line="16" column="26" lean-forward="true" selection-start-line="6" selection-end-line="16" selection-end-column="26" />
+              <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -42,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/javascript/数组去重.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="5" />
+            <state relative-caret-position="247">
+              <caret line="13" column="28" lean-forward="true" selection-end-line="18" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -85,8 +82,8 @@
         <option value="$PROJECT_DIR$/javascript/数组扁平化.js" />
         <option value="$PROJECT_DIR$/javascript/两个有序数组合并.js" />
         <option value="$PROJECT_DIR$/javascript/javascript.md" />
-        <option value="$PROJECT_DIR$/javascript/数组去重.js" />
         <option value="$PROJECT_DIR$/javascript/reverse.js" />
+        <option value="$PROJECT_DIR$/javascript/数组去重.js" />
       </list>
     </option>
   </component>
@@ -332,30 +329,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/javascript/数组去重.js">
+    <entry file="file://$PROJECT_DIR$/javascript/reverse.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="5" />
+        <state relative-caret-position="304">
+          <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/javascript/javascript.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="418">
-            <caret line="22" column="8" lean-forward="true" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+          <first_editor relative-caret-position="437">
+            <caret line="23" column="42" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="42" />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/javascript/reverse.js">
+    <entry file="file://$PROJECT_DIR$/javascript/数组去重.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="26" lean-forward="true" selection-start-line="6" selection-end-line="16" selection-end-column="26" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state relative-caret-position="247">
+          <caret line="13" column="28" lean-forward="true" selection-end-line="18" selection-end-column="1" />
         </state>
       </provider>
     </entry>
