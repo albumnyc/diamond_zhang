@@ -23,3 +23,4 @@ Object的 assign, freeze, keys 实现。
 合并两个有序数组
 数组去重:  [{a:1},{a:2},{a:3}, 1,2,3,3,{a:2}] 
 Object.create
+includes()
