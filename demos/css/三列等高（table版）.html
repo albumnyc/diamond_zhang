@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小张与三列等高</title>
+    <style>
+        .box{
+            width:100%;
+            height:100%;
+            background-color: aquamarine;
+            position: absolute;
+            display: table;
+        }
+        .left{
+            width:100px;
+            height:100%;
+
+            background-color: cornflowerblue;
+            display:table-cell;
+        }
+        .right{
+            width:100px;
+            height:100%;
+            background-color: orange;
+            display:table-cell;
+
+        }
+        .middle{
+            height:100%;
+            background-color: antiquewhite;
+            display:table-cell;
+
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="box">
+    <div class="left">left</div>
+    <div class="middle">middle</div>
+    <div class="right">right</div>
+</div>
+</body>
+</html>
