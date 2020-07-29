@@ -1,3 +1,9 @@
+/*
+ * @Author: edwardnie
+ * @LastEditTime: 2020-07-29 09:46:53
+ * @LastEditors: edwardnie
+ * @FilePath: /diamond_zhang/demos/javascript/两个有序数组合并.js
+ */ 
 function myMerge(arr1,arr2){
     const len1=arr1.length;
     const len2=arr2.length;
@@ -21,3 +27,35 @@ function myMerge(arr1,arr2){
     }
     return arr3;
 }
+
+/**
+ * @param {Array[]} arrs
+ * @param {boolean=false} [isUnique]
+ * @param {Function=(a, b) => a - b} [compare]
+ * @returns {Array}
+ */
+function myMerge (arrs, isUnique = false, compare = (a, b) => a - b) {
+    if (!Array.isArray(arrs)) { return [] }
+  
+    var result = []
+  
+    arrs.forEach(arr1 => {
+      arr1 = Array.isArray(arr1) ? arr1.slice() : [arr1]
+      let arr2 = result
+      result = []
+  
+      while (arr1.length > 0 && arr2.length > 0) {
+        result.push(compare(arr1[0], arr2[0]) <= 0 ? arr1.shift() : arr2.shift())
+      }
+  
+      result = result.concat(arr1, arr2)
+  
+      if (isUnique) {
+        result = Array.from(new Set(result))
+      }
+    })
+  
+    return result
+  }
+  
+  
