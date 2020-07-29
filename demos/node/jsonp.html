@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            function jsonp(req) {
+                var script = document.createElement("script");
+                var url = req.url + "?callback=" + req.callback.name;
+                script.src = url;
+                document.getElementsByTagName("head")[0].appendChild(script);
+            }
+            
+            function miss(res) {
+                alert("miss " + res.data);
+            }
+            window.miss = miss;
+
+
+            setTimeout(() => {
+                jsonp({
+                    url: "http://localhost:8080/",
+                    callback: miss,
+                });
+            }, 1000);
+        </script>
+    </body>
+</html>
