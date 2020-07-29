@@ -1,10 +1,10 @@
 /*
  * @Author: edwardnie
- * @LastEditTime: 2020-07-29 09:36:37
+ * @LastEditTime: 2020-07-29 09:50:31
  * @LastEditors: edwardnie
  * @FilePath: /diamond_zhang/demos/javascript/reverse.js
  */ 
-const str = " zhangjiahui     like  nieyichao  very       very much ";
+const str = " zhangjiahui     love  nieyichao  very       very much ";
 function reserve(str) {
     const origin=str.split(" ");
     const new_str=[];
