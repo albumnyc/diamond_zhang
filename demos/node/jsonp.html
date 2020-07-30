@@ -8,12 +8,13 @@
     <body>
         <script>
             function jsonp(req) {
+                //window[callback]=callback;
                 var script = document.createElement("script");
-                var url = req.url + "?callback=" + req.callback.name;
-                script.src = url;
+                var url= req.url + "?callback=" + req.callback.name;
+                script.src=url;
                 document.getElementsByTagName("head")[0].appendChild(script);
             }
-            
+            //自定义回调函数
             function miss(res) {
                 alert("miss " + res.data);
             }
