@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>备忘录</title>
+    <script src="vue.min.js"></script>
+    <style>
+        #box{
+            margin:0 auto;
+        }
+        h1{
+            color:darkseagreen;
+        }
+        .add-text{
+            outline: 0;
+            width:400px;
+            height:40px;
+        }
+        .bye{
+            display:block;
+            position:absolute;
+            top:0;
+            right:10px;
+            bottom:0;
+            width:70px;
+            height:40px;
+            margin:0 auto;
+            color:white;
+            margin-bottom:11px;
+          background-color: darkseagreen;
+        }
+        .check{
+            text-align:center;
+            width:40px;
+            height:auto;
+            position:absolute;
+            top:5px;
+            bottom:0;
+            margin:auto 0;
+            border:0;
+
+
+        }
+        .todo-task{
+            margin:0;
+            padding:0;
+            list-style:none;
+        }
+        .todo-task li{
+            position:relative;
+            font-size:16px;
+            border-bottom:1px solid #ededed;
+        }
+        .todo-task li .editing{
+            border-bottom: 0;
+            padding: 0;
+        }
+        .todo-task li.editing .new-edit{
+            display: block;
+            position: absolute;
+            width:506px;
+            padding:13px 17px 12px 17px;
+            margin:0 0 0 43px
+        }
+        .todo-task li.editing .view{
+            display: none;
+        }
+        .todo-task li label{
+            white-space:pre-line;
+            word-break:break-all;
+            padding:15px 60px 15px 15px;
+            margin-left:45px;
+            display:block;
+
+
+        }
+        .todo-task li.done label{
+            color:grey;
+            text-decoration:line-through;
+        }
+
+
+        .todo-task li .new-edit{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <h1>TO DO (^-^)</h1>
+    <input
+            class="add-text"
+            placeholder="今天你想做什么呢？"
+            type="text"
+            v-on:keyup.enter="addItem"
+            v-model="todo"/>
+    <div class="tasks">
+
+        <ul class="todo-task" v-show="todo_list.length">
+            <li class="todo"
+                v-for="item in filterData"
+                v-bind:class="{done:item.isDone,editing:item===newTodos}">
+
+                <div class="view">
+                    <input
+                            class="check"
+                            type="checkbox"
+                            v-model="item.isDone"
+                    />
+                    <label @dblclick="changeItem(item)">{{item.value}}</label>
+                    <button
+                            class="bye"
+                            @click="deleteItem(item)">删除</button>
+                </div>
+                <input
+                        class="new-edit"
+                        type="text"
+                        v-focus="newTodos===item"
+                        v-model="item.value"
+                        @blur="editOk(item)"
+                        @keyup.enter="editOk(item)"
+                />
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<script >
+    //保存和查找数据
+    var store={
+        save(key,value){
+            window.localStorage.setItem(key,JSON.stringify(value));
+        },
+        fetch(key){
+            return JSON.parse(window.localStorage.getItem(key))||[];
+        }
+    }
+    //把store中的数据存在list中
+    var todo_list=store.fetch("storeData");
+
+    var vm=new Vue({
+        el:"#box",
+        data:{
+            todo_list,
+            todo:'',
+            newTodos:'',
+            visibility:'all'
+        },
+        watch:{
+            //当todo_list发生变化，执行函数
+            todo_list:function(){
+                store.save("storeData",this.todo_list);
+            }
+        },
+        methods:{
+            addItem(ev){
+                if(this.todo==""){
+                    return;
+                }
+                this.todo_list.push({
+                    value:this.todo,
+                    isDone:false
+                });
+                this.todo="";
+            },
+            deleteItem(item){
+                this.todo_list.splice(this.todo_list.indexOf(item),1);
+
+            },
+            changeItem(item){
+
+                this.newTodos=item;
+
+            },
+            editOk(item){
+                this.newTodos="";
+            }
+        },
+        computed:{
+            filterData(){
+                return todo_list;
+            }
+        }
+    });
+    function hashFn(){
+
+        vm.visibility = window.location.hash.slice(1);
+    }
+    hashFn();
+    window.addEventListener('hashchange',hashFn);
+</script>
+</body>
+</html>
