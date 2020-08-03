@@ -4,8 +4,8 @@
         <meta charset="UTF-8" />
         <title>备忘录</title>
         <script src="vue.min.js"></script>
+        <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
         <style>
-
             h1 {
                 color: darkseagreen;
             }
@@ -53,7 +53,7 @@
             }
             .todo-task li.editing .new-edit {
                 display: block;
-                padding:15px 60px 15px 15px;
+                padding: 15px 60px 15px 15px;
                 width: 500px;
                 position: relative;
                 margin: 0 0 0 45px;
@@ -76,21 +76,25 @@
             .todo-task li .new-edit {
                 display: none;
             }
-            .todo-task li.editing :last-child{margin-bottom:-1px}
-            .action{
-                text-align:center;
-                display:flex;
+            .todo-task li.editing :last-child {
+                margin-bottom: -1px;
             }
-            .action a{
-                margin:0 10px;
-                flex:1;
-                padding:5px 0;
-                color:grey
+            .action {
+                text-align: center;
+                display: flex;
+            }
+            .action a {
+                margin: 0 10px;
+                flex: 1;
+                padding: 5px 0;
+                color: grey;
             }
             .action a:nth-child(3) {
-                margin-right: 0
-            }.active{
-                border:1px solid darkseagreen}
+                margin-right: 0;
+            }
+            .active {
+                border: 1px solid darkseagreen;
+            }
         </style>
     </head>
     <body>
@@ -104,9 +108,17 @@
                 v-model="todo"
             />
             <div class="action">
-                <a :class="{active:visibility!=='undone'&&visibility!=='done'}" href="#all">所有任务</a>
-                <a :class="{active:visibility==='undone'}" href="#undone">未完成的任务</a>
-                <a :class="{active:visibility==='done'}" href="#done">完成的任务</a>
+                <a
+                    :class="{active:visibility!=='undone'&&visibility!=='done'}"
+                    href="javascript:;"  @click="link('?filter=all')"
+                    >所有任务</a
+                >
+                <a :class="{active:visibility==='undone'}"  href="javascript:;"  @click="link('?filter=undone')"
+                    >未完成的任务</a
+                >
+                <a :class="{active:visibility==='done'}" href="javascript:;"  @click="link('?filter=done')"
+                    >完成的任务</a
+                >
             </div>
             <div class="tasks">
                 <ul class="todo-task" v-show="todo_list.length">
@@ -142,6 +154,51 @@
         </div>
 
         <script>
+            const $ = (selector) => document.querySelector(selector);
+            class Route {
+                constructor(routeMap) {
+                    this.routeMap = routeMap;
+                    this._bindPopState();
+                }
+                init(path) {
+                    path = Route.correctPath(path);
+                    history.replaceState({ path: path }, "", path);
+                    this.routeMap[path] && this.routeMap[path]();
+                }
+                go(path) {
+                    path = Route.correctPath(path);
+                    history.pushState({ path: path }, "", path);
+                    this.routeMap[path] && this.routeMap[path]();
+                }
+                _bindPopState() {
+                    window.addEventListener("popstate", (e) => {
+                        const path = e.state && e.state.path;
+                        this.routeMap[path] && this.routeMap[path]();
+                    });
+                }
+                static correctPath(path) {
+                    if (path !== "/" && path.slice(-1) === "/") {
+                        path = path.match(/(.+)\/$/)[1];
+                    }
+                    return path;
+                }
+            }
+            const routeMap = {
+                '/': ()=>{
+                    console.log('dsadsadsad');
+                },
+                "/a": () => {
+                    const content = $(".content");
+                    content.innerHTML = "<div>welcome to Home Page</div>";
+                },
+            };
+            const router = new Route(routeMap);
+            router.init(location.pathname);
+
+
+
+
+
             const generateId = (start = 0) => {
                 let num = start;
                 return () => {
@@ -198,43 +255,45 @@
                     editOk(item) {
                         this.newTodos = "";
                     },
+                    link(url){
+                        router.go(url);
+                        const filterValue = url.split('=')[1];
+                        this.visibility = filterValue;
+                    }
                 },
-                directives:{
-                    'focus':function(el,binding){
-                        if(binding.value){
+                directives: {
+                    focus: function (el, binding) {
+                        if (binding.value) {
                             el.focus();
                         }
-                    }
+                    },
                 },
                 computed: {
-                    filterData(){
+                    filterData() {
                         //过滤的时候有三种情况 all completed unCompleted
                         var filter = {
-                            all:function(todo_list){
+                            all: function (todo_list) {
                                 return todo_list;
                             },
-                            done:function(todo_list){
-                                return todo_list.filter(item=>{
+                            done: function (todo_list) {
+                                return todo_list.filter((item) => {
                                     return item.isDone;
-                                })
+                                });
                             },
-                            undone:function(todo_list){
-                                return todo_list.filter(item=>{
+                            undone: function (todo_list) {
+                                return todo_list.filter((item) => {
                                     return !item.isDone;
-                                })
-                            }
-                        }
+                                });
+                            },
+                        };
                         //如果找到了过滤函数，就返回过滤后的数据，如果没有找到就返回所有的数据
-                        return filter[this.visibility]?filter[this.visibility](todo_list):todo_list;
-                    }
-,
+                        return filter[this.visibility]
+                            ? filter[this.visibility](todo_list)
+                            : todo_list;
+                    },
                 },
             });
-            function hashFn() {
-                vm.visibility = window.location.hash.slice(1);
-            }
-            hashFn();
-            window.addEventListener("hashchange", hashFn);
+  
         </script>
     </body>
 </html>
