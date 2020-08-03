@@ -5,9 +5,7 @@
         <title>备忘录</title>
         <script src="vue.min.js"></script>
         <style>
-            #box {
-                margin: 0 auto;
-            }
+
             h1 {
                 color: darkseagreen;
             }
@@ -55,10 +53,10 @@
             }
             .todo-task li.editing .new-edit {
                 display: block;
-                position: absolute;
-                width: 506px;
-                padding: 13px 17px 12px 17px;
-                margin: 0 0 0 43px;
+                padding:15px 60px 15px 15px;
+                width: 500px;
+                position: relative;
+                margin: 0 0 0 45px;
             }
             .todo-task li.editing .view {
                 display: none;
@@ -78,6 +76,21 @@
             .todo-task li .new-edit {
                 display: none;
             }
+            .todo-task li.editing :last-child{margin-bottom:-1px}
+            .action{
+                text-align:center;
+                display:flex;
+            }
+            .action a{
+                margin:0 10px;
+                flex:1;
+                padding:5px 0;
+                color:grey
+            }
+            .action a:nth-child(3) {
+                margin-right: 0
+            }.active{
+                border:1px solid darkseagreen}
         </style>
     </head>
     <body>
@@ -90,6 +103,11 @@
                 v-on:keyup.enter="addItem"
                 v-model="todo"
             />
+            <div class="action">
+                <a :class="{active:visibility!=='undone'&&visibility!=='done'}" href="#all">所有任务</a>
+                <a :class="{active:visibility==='undone'}" href="#undone">未完成的任务</a>
+                <a :class="{active:visibility==='done'}" href="#done">完成的任务</a>
+            </div>
             <div class="tasks">
                 <ul class="todo-task" v-show="todo_list.length">
                     <li
@@ -181,10 +199,35 @@
                         this.newTodos = "";
                     },
                 },
+                directives:{
+                    'focus':function(el,binding){
+                        if(binding.value){
+                            el.focus();
+                        }
+                    }
+                },
                 computed: {
-                    filterData() {
-                        return todo_list;
-                    },
+                    filterData(){
+                        //过滤的时候有三种情况 all completed unCompleted
+                        var filter = {
+                            all:function(todo_list){
+                                return todo_list;
+                            },
+                            done:function(todo_list){
+                                return todo_list.filter(item=>{
+                                    return item.isDone;
+                                })
+                            },
+                            undone:function(todo_list){
+                                return todo_list.filter(item=>{
+                                    return !item.isDone;
+                                })
+                            }
+                        }
+                        //如果找到了过滤函数，就返回过滤后的数据，如果没有找到就返回所有的数据
+                        return filter[this.visibility]?filter[this.visibility](todo_list):todo_list;
+                    }
+,
                 },
             });
             function hashFn() {
