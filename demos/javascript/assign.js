@@ -9,8 +9,6 @@ target是目标对象，source是源对象，可以有多个，返回修改后�
 实现一个Object.assign大致思路
 1、判断参数是否正确,source不能是null或者undefined
 2、使用for..in循环遍历出所有可枚举自有属性，并赋值给新的目标对象hasOwnProperty返回非原型链上的属性
-
-
  */
 Object.myAssign=function(target,...source){
     const len=source.length;

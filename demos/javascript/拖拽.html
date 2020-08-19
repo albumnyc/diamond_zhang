@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拽</title>
+    <style>
+        #zhuai{
+            width:100px;
+            height: 100px;
+            background-color: darkseagreen;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="zhuai"></div>
+<script>
+    var box=document.getElementById('zhuai');
+    var x=0;
+    var y=0;
+    var left_set=0;
+    var top_set=0;
+    var isOpen=false;
+    //恩鼠标
+    box.onmousedown=function(e){
+        x=e.clientX;
+        y=e.clientY;
+        left_set=box.offsetLeft;
+        top_set=box.offsetTop;
+        isOpen=true;
+    }
+    //挪鼠标
+    window.onmousemove=function(e){
+        if(!isOpen){
+            return;
+        }
+        box.style.left=e.clientX-x+left_set+'px';
+        box.style.top=e.clientY-y+top_set+'px';
+    }
+    //不恩鼠标
+    box.onmouseup=function () {
+        isOpen=false;
+    }
+</script>
+</body>
+</html>
