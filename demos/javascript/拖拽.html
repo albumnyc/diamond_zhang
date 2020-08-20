@@ -1,81 +1,99 @@
+<!--
+ * @Author: edwardnie
+ * @LastEditTime: 2020-08-20 11:46:46
+ * @LastEditors: edwardnie
+ * @FilePath: /diamond_zhang/demos/javascript/拖拽.html
+-->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>拽</title>
-    <style>
-        #zhuai{
-            width:100px;
-            height: 100px;
-            background-color: darkseagreen;
-            position: absolute;
-        }
-    </style>
-</head>
-
-<body>
-    <div id="zhuai"></div>
-<script>
-    var box=document.getElementById('zhuai');
-    var x=0;
-    var y=0;
-    var left_set=0;
-    var top_set=0;
-    var isOpen=false;
-    var new_left=0;
-    var new_top=0;
-    var velocityX=0;
-    var velocityY=0;
-    //恩鼠标
-    box.onmousedown=function(e){
-        x=e.clientX;
-        y=e.clientY;
-        left_set=box.offsetLeft;
-        top_set=box.offsetTop;
-        isOpen=true;
-    }
-    //挪鼠标
-    window.onmousemove=function(e){
-        if(!isOpen){
-            return;
-        }
-        box.style.left=e.clientX-x+left_set+'px';
-        box.style.top=e.clientY-y+top_set+'px';
-
-        //算下速度
-        velocityX=box.offsetLeft-new_left;
-        velocityY=box.offsetTop-new_top;
-
-        //更新
-        new_left=box.offsetLeft;
-        new_top=box.offsetTop;
-    }
-    //不恩鼠标
-    box.onmouseup=function () {
-        isOpen=false;
-        move(box,velocityX,velocityY);
-    }
-    function move(box,velocityX,velocityY) {
-        //设一下摩擦系数吧 0.1
-
-        clearInterval();
-        box.timer=setInterval(function () {
-            velocityX=velocityX*0.9;
-            velocityY=velocityY*0.9;
-            box.style.left=box.offsetLeft+velocityX+'px';
-            box.style.top=box.offsetTop+velocityY+'px';
-            if(Math.round(velocityX)===0){
-                velocityX=0;
+    <head>
+        <meta charset="UTF-8" />
+        <title>拽</title>
+        <style>
+            #zhuai {
+                width: 100px;
+                height: 100px;
+                background-color: darkseagreen;
+                position: absolute;
             }
-            if(Math.round(velocityY)===0){
-                velocityY=0;
+        </style>
+    </head>
+
+    <body>
+        <div id="zhuai"></div>
+        <script>
+            var box = document.getElementById("zhuai");
+            var x = 0;
+            var y = 0;
+            var left_set = 0;
+            var top_set = 0;
+            var isOpen = false;
+            var new_left = 0;
+            var new_top = 0;
+            var velocityX = 0;
+            var velocityY = 0;
+
+            const reset = () => {
+                x = 0;
+                y = 0;
+                left_set = 0;
+                top_set = 0;
+                isOpen = false;
+                velocityX = 0;
+                velocityY = 0;
+            };
+            //恩鼠标
+            box.onmousedown = function (e) {
+                clearInterval(box.timer);
+                x = e.clientX;
+                y = e.clientY;
+                left_set = box.offsetLeft;
+                top_set = box.offsetTop;
+                isOpen = true;
+            };
+            //挪鼠标
+            window.onmousemove = function (e) {
+                if (!isOpen) {
+                    return;
+                }
+                box.style.left = e.clientX - x + left_set + "px";
+                box.style.top = e.clientY - y + top_set + "px";
+
+                //算下速度
+                velocityX = box.offsetLeft - new_left;
+                velocityY = box.offsetTop - new_top;
+
+                //更新
+                new_left = box.offsetLeft;
+                new_top = box.offsetTop;
+            };
+            //不恩鼠标
+            box.onmouseup = function () {
+                isOpen = false;
+                move(box, velocityX, velocityY);
+                reset();
+            };
+            function move(box, velocityX, velocityY) {
+                //设一下摩擦系数吧 0.1
+
+                clearInterval(box.timer);
+                box.timer = setInterval(function () {
+                    velocityX = velocityX * 0.9;
+                    velocityY = velocityY * 0.9;
+                    box.style.left = box.offsetLeft + velocityX + "px";
+                    box.style.top = box.offsetTop + velocityY + "px";
+                    if (Math.round(velocityX) === 0) {
+                        velocityX = 0;
+                    }
+                    if (Math.round(velocityY) === 0) {
+                        velocityY = 0;
+                    }
+                    //结束运动
+                    if (velocityX === 0 && velocityY === 0) {
+                        clearInterval(box.timer);
+                    }
+                }, 30);
             }
-            //结束运动
-            if(velocityX===0&&velocityY===0){
-                clearInterval();
-            }
-        },30);
-    }
-</script>
-</body>
+        </script>
+    </body>
 </html>
