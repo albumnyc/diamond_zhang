@@ -22,6 +22,10 @@
     var left_set=0;
     var top_set=0;
     var isOpen=false;
+    var new_left=0;
+    var new_top=0;
+    var velocityX=0;
+    var velocityY=0;
     //恩鼠标
     box.onmousedown=function(e){
         x=e.clientX;
@@ -37,10 +41,40 @@
         }
         box.style.left=e.clientX-x+left_set+'px';
         box.style.top=e.clientY-y+top_set+'px';
+
+        //算下速度
+        velocityX=box.offsetLeft-new_left;
+        velocityY=box.offsetTop-new_top;
+
+        //更新
+        new_left=box.offsetLeft;
+        new_top=box.offsetTop;
     }
     //不恩鼠标
     box.onmouseup=function () {
         isOpen=false;
+        move(box,velocityX,velocityY);
+    }
+    function move(box,velocityX,velocityY) {
+        //设一下摩擦系数吧 0.1
+
+        clearInterval();
+        box.timer=setInterval(function () {
+            velocityX=velocityX*0.9;
+            velocityY=velocityY*0.9;
+            box.style.left=box.offsetLeft+velocityX+'px';
+            box.style.top=box.offsetTop+velocityY+'px';
+            if(Math.round(velocityX)===0){
+                velocityX=0;
+            }
+            if(Math.round(velocityY)===0){
+                velocityY=0;
+            }
+            //结束运动
+            if(velocityX===0&&velocityY===0){
+                clearInterval();
+            }
+        },30);
     }
 </script>
 </body>

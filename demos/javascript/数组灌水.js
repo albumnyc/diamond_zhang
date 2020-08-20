@@ -32,3 +32,36 @@ function Water(arr){
 
     }
 }
+
+//hi
+var trap = function(heightList) {
+    if (!heightList.length) return 0
+
+    function getMaxIndex(arr){
+        var maxIndex = 0;
+        arr.forEach((_, i) => {
+            if (_ > arr[maxIndex]) {
+                maxIndex = i
+            }
+        });
+
+        return maxIndex;
+    }
+    var maxIndex = getMaxIndex(heightList)
+
+    let leftArr = heightList.slice(0, maxIndex + 1)
+    let rightArr = heightList.slice(maxIndex).reverse()
+
+    function getRect (arr) {
+        let leftMax = arr[0] || 0
+        return arr.reduce((all, height) => {
+            if (height > leftMax) {
+                leftMax = height
+            }
+            let currentHeight = leftMax - height >=0 ? leftMax - height : 0
+            return all + currentHeight
+        }, 0)
+    }
+
+    return getRect(leftArr) + getRect(rightArr)
+};
