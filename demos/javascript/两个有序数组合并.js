@@ -4,7 +4,7 @@
  * @LastEditors: edwardnie
  * @FilePath: /diamond_zhang/demos/javascript/两个有序数组合并.js
  */ 
-function myMerge(arr1,arr2){
+function ddMerge(arr1,arr2){
     const len1=arr1.length;
     const len2=arr2.length;
     const len3=len1+len2;
@@ -27,7 +27,7 @@ function myMerge(arr1,arr2){
     }
     return arr3;
 }
-
+console.log(ddMerge([1,2,3],[0,5,9]))
 /**
  * @param {Array[]} arrs
  * @param {boolean=false} [isUnique]

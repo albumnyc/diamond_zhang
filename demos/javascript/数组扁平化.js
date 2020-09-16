@@ -3,3 +3,4 @@ function simple(array){
         return pre.concat(Array.isArray(cur)?simple(cur):cur)
     },[]);
 }
+console.log (simple({"1":123,"2":234,"8":456}))

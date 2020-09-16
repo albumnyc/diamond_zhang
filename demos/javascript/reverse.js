@@ -5,7 +5,7 @@
  * @FilePath: /diamond_zhang/demos/javascript/reverse.js
  */ 
 const str = " zhangjiahui     love  nieyichao  very       very much ";
-function reserve(str) {
+function Myreserve(str) {
     const origin=str.split(" ");
     const new_str=[];
     const len=origin.length;
@@ -33,4 +33,14 @@ function reserve(str) {
     }
     return result;
 }
-console.log(reserve(str)); // -> " much very       very  nieyichao  like     zhangjiahui "
+//console.log(reserve(str)); // -> " much very       very  nieyichao  like     zhangjiahui "
+
+function m(str){
+    const len=str.length;
+    const result=[];
+    for(let i=len-1;i>=0;i--){
+       result.push(str.charAt(i));
+    }
+    return result.join('');
+}
+console.log(m("sdfjsklf"));

@@ -17,3 +17,4 @@ function mySimple(arr){
     })
     return newArr;
 }
+console.log(mySimple([2,3,3]));

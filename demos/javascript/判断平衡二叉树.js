@@ -12,7 +12,7 @@ function IsTree(root){
     let left_depth=findDepth(root.left);
     let right_depth=findDepth(root.right);
 
-    if(Math.abs(left_depth,right_depth)>1){
+    if(Math.abs(left_depth-right_depth)>1){
         return false;
     }else{
         return IsTree(root.left)&&IsTree(root.right);

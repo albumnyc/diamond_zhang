@@ -1,4 +1,5 @@
 //定义树
+//验证二叉树是否为对称二叉树，即左子树和右子树是否对称
 function TreeNode(x){
     this.val=x;
     this.left=null;
