@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            #text-line{
+                position: relative;
+                background-color: powderblue;
+                width: 310px;
+                border: black 1px solid;
+                height: 30px;
+                margin-bottom: 10px;
+            }
+            #box{
+              position: relative;
+              display:flex;
+              background-color: pink;
+              width:310px;
+              height:500px;
+              justify-content: space-between;
+              flex-direction: row;
+              flex-wrap: wrap;
+              
+            }
+            .box-cell{
+                font-size: larger;
+                background: powderblue;
+                width:100px;
+                height:100px;
+                
+            }
+        </style>
+    </head>
+    
+    <body>
+       <input id='text-line' type="text" value=""></input>
+       <div id='box'>
+           <input class='box-cell' value='0' type="button" onclick="getValue()"></input>
+           <input class='box-cell' value='1' type="button" onclick="getValue()"></input>
+           <input class='box-cell' value='2' type="button" onclick="getValue()"></input>
+           <input class='box-cell' value='3' type="button" onclick="getValue()"></input>
+           <input class='box-cell' value='4' type="button" onclick="getValue()"></input>
+           <input class='box-cell' value='5' type="button" onclick="getValue()"></input>
+           <input class='box-cell' value='6' type="button" onclick="getValue()"></input>
+           <input class='box-cell' value='7' type="button" onclick="getValue()"></input>
+           <input class='box-cell' value='8' type="button" onclick="getValue()"></input>
+           <input class='box-cell' value='9' type="button" onclick="getValue()"></input>
+           <input class='box-cell' value='.' type="button" onclick="getValue()"></input>
+           <input class='box-cell' value='×' type="button" onclick="getValue()"></input>
+
+
+       </div>
+       <script>
+           var btns = document.getElementsByClassName("box-cell");
+                for (var i=0, len=btns.length; i<len; i++) {
+                    btns[i].onclick = function(){
+                       
+                        var pre=document.getElementById('text-line');
+                       
+                        if(this.value!='×'){
+                            pre.value=pre.value.toString()+this.value.toString();
+                        }else{
+                            var buff=pre.value.toString();
+                            pre.value=buff.substr(0, buff.length - 1);
+                        }
+
+                    }
+                }
+           
+       </script>
+    </body>
+</html>
