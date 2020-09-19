@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
+       
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+
         <style>
+            #outer{
+                overflow: hidden;
+                width:312px;
+                display: block;
+                height:550px;
+                background-color: wheat;
+            }
             #text-line{
                 position: relative;
                 background-color: powderblue;
@@ -10,10 +19,21 @@
                 border: black 1px solid;
                 height: 30px;
                 margin-bottom: 10px;
+               
+                top:500px;
+
+            }
+            @keyframes myText {
+                from{
+                    top:500px;
+                }
+                to{
+                    top:0;
+                }
             }
             #box{
               position: relative;
-              display:flex;
+              display:none;
               background-color: pink;
               width:310px;
               height:500px;
@@ -25,47 +45,63 @@
             .box-cell{
                 font-size: larger;
                 background: powderblue;
-                width:100px;
-                height:100px;
+                width:30%;
+                height:20%;
                 
             }
+
         </style>
     </head>
     
     <body>
-       <input id='text-line' type="text" value=""></input>
-       <div id='box'>
-           <input class='box-cell' value='0' type="button" onclick="getValue()"></input>
-           <input class='box-cell' value='1' type="button" onclick="getValue()"></input>
-           <input class='box-cell' value='2' type="button" onclick="getValue()"></input>
-           <input class='box-cell' value='3' type="button" onclick="getValue()"></input>
-           <input class='box-cell' value='4' type="button" onclick="getValue()"></input>
-           <input class='box-cell' value='5' type="button" onclick="getValue()"></input>
-           <input class='box-cell' value='6' type="button" onclick="getValue()"></input>
-           <input class='box-cell' value='7' type="button" onclick="getValue()"></input>
-           <input class='box-cell' value='8' type="button" onclick="getValue()"></input>
-           <input class='box-cell' value='9' type="button" onclick="getValue()"></input>
-           <input class='box-cell' value='.' type="button" onclick="getValue()"></input>
-           <input class='box-cell' value='×' type="button" onclick="getValue()"></input>
-
-
-       </div>
+        <div id='outer'>
+            <input id='text-line' type="text" value="" onclick="showKey()"></input>
+             <div id='box'>
+            </div>
+        </div>
        <script>
-           var btns = document.getElementsByClassName("box-cell");
-                for (var i=0, len=btns.length; i<len; i++) {
-                    btns[i].onclick = function(){
-                       
+            var box=document.getElementById('box');
+           
+           var isDone=false;
+           //我在动态创建button
+           function createButton(){
+               var content=['0','1','2','3','4','5','6','7','8','9','.','×'];
+               
+               for(let i=0;i<content.length;i++){
+                   
+                var cell=document.createElement('input');
+                cell.type='button';
+                cell.className='box-cell';
+                cell.value=content[i];
+                cell.onclick=function Clickme(){
                         var pre=document.getElementById('text-line');
-                       
+                     
                         if(this.value!='×'){
                             pre.value=pre.value.toString()+this.value.toString();
                         }else{
                             var buff=pre.value.toString();
                             pre.value=buff.substr(0, buff.length - 1);
                         }
+                };
+                box.appendChild(cell);
+               
+               }
+               isDone=true;
+               
+           }
+           function showKey(){
 
-                    }
+               var text=document.getElementById('text-line');
+              
+               var box=document.getElementById('box');
+                if(!isDone){ 
+                   box.style.display='flex';
+                    createButton();
+              
                 }
+
+           }
+          
            
        </script>
     </body>
